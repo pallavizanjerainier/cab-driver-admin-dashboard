@@ -10,14 +10,68 @@ import {
   Tooltip,
   styled,
   useTheme,
-  Button
+  Button,
+  Typography,
+  Link,
+  List,
+  ListItem,
+  ListItemText
 } from '@mui/material';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
-import { Link as RouterLink } from 'react-router-dom';
+import { NavLink, Link as RouterLink } from 'react-router-dom';
 import HeaderMenu from './Menu';
 import Logo from 'src/components/Logo';
+const ListWrapper = styled(Box)(
+  ({ theme }) => `
+        .MuiTouchRipple-root {
+            display: none;
+        }
+        
+        .MuiListItem-root {
+            transition: ${theme.transitions.create(['color', 'fill'])};
+            
+            &.MuiListItem-indicators {
+                padding: ${theme.spacing(1, 2)};
+            
+                .MuiListItemText-root {
+                    .MuiTypography-root {
+                        &:before {
+                            height: 4px;
+                            width: 22px;
+                            opacity: 0;
+                            visibility: hidden;
+                            display: block;
+                            position: absolute;
+                            bottom: -10px;
+                            transition: all .2s;
+                            border-radius: ${theme.general.borderRadiusLg};
+                            content: "";
+                            background: ${theme.colors.primary.main};
+                        }
+                    }
+                }
 
+                &.active,
+                &:active,
+                &:hover {
+                
+                    background: transparent;
+                
+                    .MuiListItemText-root {
+                        .MuiTypography-root {
+                            &:before {
+                                opacity: 1;
+                                visibility: visible;
+                                bottom: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+`
+);
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
         height: ${theme.header.height};
@@ -66,14 +120,37 @@ function LandingHeader() {
         <Logo />
       </Stack>
       <Box display="flex" alignItems="center">
-        <Button
-            component={RouterLink}
-            to="/components/forms"
-            size="large"
-            variant="contained"
+  
+      <ListWrapper
+        sx={{
+          display: {
+            xs: 'none',
+            md: 'block'
+          }
+        }}
+      >
+        <List disablePadding component={Box} display="flex">
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            component={NavLink}
+            to="/sign-up"
           >
-            Login
-          </Button>
+            <ListItemText
+              primaryTypographyProps={{ noWrap: true }}
+              primary="REGISTER"
+            />
+          </ListItem>
+        </List>
+      </ListWrapper>
+      <Button
+          component={RouterLink}
+          to="/components/forms"
+          size="large"
+          variant="contained"
+        >
+          LOGIN
+        </Button>
       </Box>
     </HeaderWrapper>
   );

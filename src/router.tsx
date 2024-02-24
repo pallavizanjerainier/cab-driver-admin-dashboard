@@ -20,6 +20,8 @@ const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Dashboards
 
+const SignUp = Loader(lazy(() => import('src/content/signUp')));
+
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
 // Applications
@@ -88,6 +90,10 @@ const routes: RouteObject[] = [
       {
         path: 'overview',
         element: <Navigate to="/" replace />
+      },
+      {
+        path: 'sign-up',
+        element: <SignUp />
       },
       {
         path: 'status',

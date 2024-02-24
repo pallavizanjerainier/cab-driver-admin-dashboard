@@ -20,6 +20,8 @@ import {
 } from '@mui/material';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import PhoneNumberInput from 'src/components/PhoneInputBox';
+import CountryTextField from './CountryTextField';
 const MuiAvatar = styled(Box)(
   ({ theme }) => `
     width: ${theme.spacing(12)};
@@ -76,23 +78,27 @@ function MyCards() {
             </AvatarContainer>
 
           </Grid>
-          <Grid item xs={12} mb={4}>
+          <Grid item xs={12}>
             <TextField
-              label="Name"
+              label="Full Name"
               variant="outlined"
               fullWidth
               margin="normal"
             />
-            <TextField
-              label="Email"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-            />
+          </Grid>
+          <Grid item xs={7}>
+            <CountryTextField/>
+          </Grid>
+          <Grid item xs={5}>
+          <PhoneNumberInput label="Phone Number"/>
+          </Grid>
+          <Grid item xs={12} mb={4} mt={3}>
             <Button
+              style={{borderRadius: 0}}
+              fullWidth
               variant="contained"
-              color="primary"
               type="submit"
+              color="success"
             >
               Submit
             </Button>
